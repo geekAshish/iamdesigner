@@ -8,7 +8,7 @@ const Portfolio = () => {
       
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="text-xl font-bold tracking-widest">PORTFOLIO</div>
           <div className="flex gap-6 text-sm text-gray-300">
             <a href="#work" className="hover:text-green-400 transition-colors">Work</a>
@@ -23,7 +23,7 @@ const Portfolio = () => {
         {/* Green Glow Background Effect */}
         <div className="absolute top-20 right-0 w-96 h-96 bg-green-600/20 rounded-full blur-[100px] -z-10"></div>
 
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="max-w-2xl">
             <p className="text-green-500 mb-4 tracking-widest text-sm uppercase">Welcome</p>
             <h1 className="text-5xl md:text-7xl font-serif italic leading-tight mb-6">
@@ -33,7 +33,7 @@ const Portfolio = () => {
               </span>
             </h1>
             <p className="text-gray-400 text-lg max-w-lg mb-8">
-              Specializing in Brand Identity, Packaging Design, and Social Media visuals that leave a lasting impression.
+              Specializing in <span className='font-semibold text-white'> Brand Identity, Packaging Design, and Social Media visuals </span> that leave a lasting impression.
             </p>
             <button className="bg-green-600 text-black px-8 py-3 rounded-full font-bold hover:bg-green-500 transition-all flex items-center gap-2">
               View My Work <ArrowUpRight size={20} />
@@ -42,21 +42,21 @@ const Portfolio = () => {
           
           {/* Avatar Placeholder */}
           <div className="relative">
-            <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-green-500/50 p-2 relative z-10">
-              <img 
-                src="/api/placeholder/400/400" 
-                alt="Profile" 
-                className="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-500"
-              />
-            </div>
-            {/* Decorative ring */}
-            <div className="absolute inset-0 border border-dashed border-gray-700 rounded-full scale-125 animate-spin-slow"></div>
+          <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-green-500/50 p-2 relative z-10">
+            <img 
+              src="/api/placeholder/400/400" 
+              alt="Profile" 
+              className="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-500"
+            />
           </div>
+          
+          <div className="absolute inset-0 border border-dashed border-gray-700 rounded-full scale-125 animate-[spin_40s_linear_infinite]"></div>
+        </div>
         </div>
       </header>
 
       {/* Main Content Container */}
-      <main className="max-w-6xl mx-auto px-4 py-10 space-y-32">
+      <main className="max-w-7xl mx-auto px-4 py-10 space-y-32">
 
         {/* Section: Logo Folio */}
         <section id="work">
@@ -117,7 +117,7 @@ const Portfolio = () => {
 
         {/* Section: Web Ads */}
         <section>
-          <SectionTitle title="Web Ads" />
+          <SectionTitle title="Ads" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="aspect-video bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center">
                 <span className="text-gray-500">Banner Ad Campaign 1</span>
