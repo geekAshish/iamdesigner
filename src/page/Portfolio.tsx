@@ -1,8 +1,87 @@
 
-import { Mail, Instagram, Linkedin, ArrowUpRight, Globe } from 'lucide-react';
-import type { ReactNode } from 'react';
+import { Mail, Instagram, Linkedin, ArrowUpRight, Globe, Phone } from 'lucide-react';
+import { useState, type ReactNode } from 'react';
+
+import frontGreenImage from '../assets/front_green_1.png';
+import aboutImage from '../assets/About.png'
+
+import photoshop from '../assets/photoshop.png'
+import after_effect from '../assets/after_effect.png'
+import indesign from '../assets/indesign.png'
+import figma from '../assets/illustrator.png'
+
 
 const Portfolio = () => {
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyFPsM5PEBvhi_7-dI9y-37AISo1Un-3wjx9_LTaEhELEykyUUqDPeKMeTIxKFoQfyQ/exec";
+
+  const [formData, setFormData] = useState({
+    name: '',
+    contact_number: '',
+    email: '',
+    description: '',
+    is_follow_up: 'No' // Default value
+  });
+
+  const [status, setStatus] = useState('');
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('Submitting...');
+
+    try {
+      // We use 'no-cors' mode because Google Scripts redirects, which browser security often blocks in standard CORS checks.
+      // NOTE: With 'no-cors', you won't get a readable JSON response back, but the data WILL save.
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      setStatus('Success! Details saved.');
+      // Optional: Reset form
+      setFormData({ name: '', contact_number: '', email: '', description: '', is_follow_up: 'No' });
+
+    } catch (error) {
+      console.error("Error:", error);
+      setStatus('Error submitting form.');
+    }
+  };
+
+
+  const tools = [
+  { 
+    name: 'Photoshop', 
+    src: photoshop, 
+    // Top Left: Tilted Left
+    style: "top-[-20px] left-[-20px] md:top-[-40px] md:left-[-40px] -rotate-12" 
+  },
+  { 
+    name: 'After Effects', 
+    src: after_effect, 
+    // Top Right: Tilted Right
+    style: "top-[-20px] right-[-20px] md:top-[-40px] md:right-[-40px] rotate-12" 
+  },
+  { 
+    name: 'Premiere', 
+    src: figma, 
+    // Bottom Left: Tilted Left
+    style: "bottom-[-20px] left-[-20px] md:bottom-[-40px] md:left-[-40px] -rotate-12" 
+  },
+  { 
+    name: 'DaVinci', 
+    src: indesign, 
+    // Bottom Right: Tilted Right
+    style: "bottom-[10%] right-[-20px] md:bottom-[15%] md:right-[-40px] rotate-12" 
+  },
+];
+
   return (
     <div className="min-h-screen bg-black text-white font-sans selection:bg-green-500 selection:text-black">
       
@@ -19,41 +98,69 @@ const Portfolio = () => {
       </nav>
 
       {/* Hero Section */}
-      <header className="pt-32 pb-20 px-6 relative overflow-hidden">
-        {/* Green Glow Background Effect */}
-        <div className="absolute top-20 right-0 w-96 h-96 bg-green-600/20 rounded-full blur-[100px] -z-10"></div>
+      <header className="pt-32 pb-20 px-6 relative overflow-hidden min-h-screen flex items-center">
+      
+      {/* Green Glow Background Effect */}
+      <div className="absolute top-20 right-0 w-96 h-96 bg-green-600/20 rounded-full blur-[100px] -z-10"></div>
 
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
-          <div className="max-w-2xl">
-            <p className="text-green-500 mb-4 tracking-widest text-sm uppercase">Welcome</p>
-            <h1 className="text-5xl md:text-7xl font-serif italic leading-tight mb-6">
-              Graphic Designer <br />
-              <span className="not-italic font-sans font-bold text-transparent bg-clip-text bg-linear-to-r from-white to-gray-500">
-                & Art Director
-              </span>
-            </h1>
-            <p className="text-gray-400 text-lg max-w-lg mb-8">
-              Specializing in <span className='font-semibold text-white'> Brand Identity, Packaging Design, and Social Media visuals </span> that leave a lasting impression.
-            </p>
-            <button className="bg-green-600 text-black px-8 py-3 rounded-full font-bold hover:bg-green-500 transition-all flex items-center gap-2">
-              View My Work <ArrowUpRight size={20} />
-            </button>
-          </div>
-          
-          {/* Avatar Placeholder */}
-          <div className="relative">
-          <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-green-500/50 p-2 relative z-10">
-            <img 
-              src="/api/placeholder/400/400" 
-              alt="Profile" 
-              className="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-500"
-            />
-          </div>
-          
-          <div className="absolute inset-0 border border-dashed border-gray-700 rounded-full scale-125 animate-[spin_40s_linear_infinite]"></div>
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10 w-full">
+        
+        {/* --- Left Content --- */}
+        <div className="max-w-2xl z-20">
+          <p className="text-green-500 mb-4 tracking-widest text-sm uppercase">Welcome</p>
+          <h1 className="text-5xl md:text-7xl font-serif italic leading-tight mb-6">
+            Graphic Designer <br />
+            <span className="not-italic font-sans font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
+              & Art Director
+            </span>
+          </h1>
+          <p className="text-gray-400 text-lg max-w-lg mb-8">
+            Specializing in <span className='font-semibold text-white'> Brand Identity, Packaging Design, and Social Media visuals </span> that leave a lasting impression.
+          </p>
+          <button className="bg-green-600 text-black px-8 py-3 rounded-full font-bold hover:bg-green-500 transition-all flex items-center gap-2 cursor-pointer">
+            View My Work <ArrowUpRight size={20} />
+          </button>
         </div>
+
+        {/* --- Right Content --- */}
+        <div className="relative flex justify-center items-center mt-16 md:mt-0">
+          
+          {/* Main Container */}
+          <div className="relative w-64 h-64 md:w-80 md:h-80">
+            
+            {/* --- 1. THE SPINNING CIRCLE (Added Back) --- */}
+            {/* scale-125 makes it slightly larger than the profile image, just like your original */}
+            <div className="absolute inset-0 border border-dashed border-gray-700 rounded-full scale-125 animate-[spin_40s_linear_infinite]"></div>
+
+            {/* --- 2. Profile Image --- */}
+            <div className="w-full h-full rounded-full border-2 border-green-500/50 p-2 relative z-10 bg-black">
+              <img
+                src={frontGreenImage}
+                alt="Profile"
+                className="w-full h-full object-cover rounded-full"
+              />
+            </div>
+
+            {/* --- 3. Floating Icons --- */}
+            {tools.map((tool, index) => (
+              <div
+                key={tool.name}
+                className={`absolute w-16 h-16 md:w-20 md:h-20 bg-black/80 rounded-2xl border border-gray-800 flex items-center justify-center animate-float hover:scale-110 transition-transform duration-300 z-20 ${tool.style}`}
+                style={{ animationDelay: `${index * 0.5}s` }}
+              >
+                <img 
+                  src={tool.src} 
+                  alt={tool.name} 
+                  className="w-10 h-10 md:w-12 md:h-12 object-contain" 
+                />
+              </div>
+            ))}
+
+          </div>
         </div>
-      </header>
+
+      </div>
+    </header>
 
       {/* Main Content Container */}
       <main className="max-w-7xl mx-auto px-4 py-10 space-y-32">
@@ -143,14 +250,14 @@ const Portfolio = () => {
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="flex-1 text-left space-y-6">
               <p className="text-gray-300 leading-relaxed">
-                Hello! I am a passionate graphic designer with over 5 years of experience in creating visual concepts that inspire, inform, and captivate consumers. My expertise lies in branding, digital design, and packaging.
+                I’m Sanjay Sondhiya — a visual storyteller obsessed with clarity. With extensive experience in Art Direction, I combine bold typography, color theory, and market logic to craft distinctive designs that resonate.
               </p>
               <p className="text-gray-300 leading-relaxed">
-                I believe that great design is not just about making things look good, but about solving problems and communicating effectively. Let's work together to bring your vision to life.
+                I move beyond surface-level aesthetics to build visual systems that solve problems and communicate value instantly. My work doesn't just decorate a brand; it defines it, ensuring your business leaves a memorable mark in a crowded marketplace.
               </p>
             </div>
             <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-red-900/50 shadow-2xl">
-               <img src="/api/placeholder/300/300" alt="About Portrait" className="w-full h-full object-cover" />
+               <img src={aboutImage} alt="About Portrait" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -160,7 +267,96 @@ const Portfolio = () => {
       <footer id="contact" className="bg-black pt-20 pb-10 border-t border-gray-900">
         <div className="max-w-4xl mx-auto text-center px-4">
           <h2 className="text-green-500 text-4xl md:text-6xl font-bold mb-4">Let's Talk</h2>
-          <p className="text-white text-xl md:text-2xl mb-8">example@gmail.com</p>
+          {/* Clickable Email */}
+
+          <div className='flex flex-col md:flex-row items-center justify-center gap-6'>
+  {/* Clickable Email */}
+  <a 
+    href="mailto:example@gmail.com" 
+    className="flex items-center gap-2 text-white text-xl md:text-2xl mb-8 hover:text-gray-300 transition-colors"
+  >
+    <Mail className="w-3 h-3 md:w-7 md:h-7" />
+    <span>example@gmail.com</span>
+  </a>
+
+  {/* Clickable Mobile */}
+  <a 
+    href="tel:+918090564901" 
+    className="flex items-center gap-2 text-white text-xl md:text-2xl mb-8 hover:text-gray-300 transition-colors"
+  >
+    <Phone className="w-3 h-3 md:w-6 md:h-6" />
+    <span>+91 8090564901</span>
+  </a>
+</div>
+
+          <div className="max-w-md mx-auto mt-3 mb-7 rounded-lg shadow-md">
+      
+      <form onSubmit={handleSubmit} className="space-y-4">
+        
+        {/* Name */}
+        <div>
+          <label className="block text-sm text-left font-medium text-gray-200">Name</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className="mt-1 block w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Contact Number */}
+        <div>
+          <label className="block text-sm font-medium text-gray-200 text-left">Contact Number</label>
+          <input
+            type="tel"
+            name="contact_number"
+            value={formData.contact_number}
+            onChange={handleChange}
+            required
+            className="mt-1 block w-full rounded-md border border-gray-300 p-2"
+          />
+        </div>
+
+        {/* Email */}
+        <div>
+          <label className="block text-sm font-medium text-gray-200 text-left">Email</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="mt-1 block w-full rounded-md border border-gray-300 p-2"
+          />
+        </div>
+
+        {/* Description */}
+        <div>
+          <label className="block text-sm font-medium text-gray-200 text-left">Description</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            rows={3}
+            className="mt-1 block w-full rounded-md border border-gray-300 p-2"
+          ></textarea>
+        </div>
+
+        <div className="relative inline-block">
+          <div className="absolute inset-0 m-auto w-48 h-12 bg-gradient-to-r from-red-500 via-yellow-400 to-green-500 rounded-full blur-xl opacity-40 animate-pulse"></div>
+          <button
+            type="submit"
+            className="relative bg-white m-auto w-48 text-black font-semibold py-2 px-10 rounded-lg text-lg transition-transform transform hover:scale-105 duration-300 shadow-md hover:shadow-lg"
+          >
+            {status === 'Submitting...' ? 'Sending...' : 'Submit'}
+          </button>
+        </div>
+
+        {status && <p className="text-center text-sm mt-4 text-green-600">{status}</p>}
+      </form>
+    </div>
           
           <div className="flex justify-center gap-8 mb-12">
             <SocialLink icon={<Instagram size={24} />} label="Instagram" />
