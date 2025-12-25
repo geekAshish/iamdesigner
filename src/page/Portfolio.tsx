@@ -10,6 +10,41 @@ import after_effect from '../assets/after_effect.png'
 import indesign from '../assets/indesign.png'
 import figma from '../assets/illustrator.png'
 
+import logo1 from '../assets/Portfolio/&DONE Logo.png'
+import logo2 from '../assets/Portfolio/SicSem Logo.png'
+
+import visualIdentity from '../assets/Portfolio/Visual Identiy Banner.png'
+import visualIdentity1 from '../assets/Portfolio/Visual Identity Mockup set 1.png'
+import visualIdentity2 from '../assets/Portfolio/Visual Identity Mockup set 2.png'
+
+import social1 from '../assets/Portfolio/Social media 1.png'
+import social2 from '../assets/Portfolio/Social media 2.png'
+import social3 from '../assets/Portfolio/Social media 3.png'
+import social6 from '../assets/Portfolio/Social media 6.png'
+import social7 from '../assets/Portfolio/Social media 7.png'
+import social8 from '../assets/Portfolio/Social media 8.png'
+import social9 from '../assets/Portfolio/Social media 9.png'
+import social10 from '../assets/Portfolio/Social media 10.png'
+
+import ads1 from '../assets/Portfolio/AD.png'
+import ads2 from '../assets/Portfolio/AD Banner 2.png'
+import ads3 from '../assets/Portfolio/AD Banner 3.png'
+import ads4 from '../assets/Portfolio/AD Banner 4.png'
+
+import thumbnail1 from '../assets/Portfolio/thumbnail 1.png'
+import thumbnail2 from '../assets/Portfolio/thumbnail 2.png'
+import thumbnail3 from '../assets/Portfolio/thumbnail 3.png'
+import thumbnail4 from '../assets/Portfolio/thumbnail 4.png'
+import thumbnail5 from '../assets/Portfolio/thumbnail 5.png'
+import thumbnail6 from '../assets/Portfolio/thumbnail 6.png'
+
+const thumbnails = [
+  thumbnail1, thumbnail2, thumbnail3, thumbnail4, thumbnail5, thumbnail6
+]
+
+const socialMediaLinks = [
+  social1, social10, social8, social9, social3, social2, social6, social7, 
+]
 
 const Portfolio = () => {
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyFPsM5PEBvhi_7-dI9y-37AISo1Un-3wjx9_LTaEhELEykyUUqDPeKMeTIxKFoQfyQ/exec";
@@ -169,10 +204,8 @@ const Portfolio = () => {
         <section id="work">
           <SectionTitle title="Logo Folio" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <ProjectCard title="Blue Tech" category="Tech" color="bg-blue-900" />
-            <ProjectCard title="Winged Brand" category="Apparel" color="bg-gray-800" />
-            <ProjectCard title="Pink Cosmetics" category="Beauty" color="bg-pink-900" />
-            <ProjectCard title="Luxury Gold" category="Real Estate" color="bg-yellow-900" />
+            <ProjectCard img={logo1} title="& Done" category="Tech" color="bg-blue-900" />
+            <ProjectCard img={logo2} title="Sicsem" category="Apparel" color="bg-gray-800" />
           </div>
         </section>
 
@@ -182,29 +215,29 @@ const Portfolio = () => {
           <div className="grid grid-cols-1 gap-6">
              {/* Wide banner style cards */}
             <div className="h-64 bg-gray-900 rounded-lg overflow-hidden group relative border border-gray-800">
-              <div className="absolute inset-0 bg-linear-to-r from-black/80 to-transparent z-10 flex flex-col justify-center px-10">
+              <div className="absolute inset-0 bg-linear-to-r from-black/60 to-transparent z-10 flex flex-col justify-center px-10">
                 <h3 className="text-3xl font-serif text-white mb-2">Corporate Branding</h3>
                 <p className="text-gray-400">Stationery & Digital Assets</p>
               </div>
-              <img src="/api/placeholder/800/400" className="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform" alt="Identity" />
+              <img src={visualIdentity} className="w-full h-full group-hover:scale-105 transition-transform" alt="Identity" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <ProjectCard title="Mockup Set 1" category="Identity" color="bg-gray-800" />
-                <ProjectCard title="Mockup Set 2" category="Identity" color="bg-gray-800" />
+                <ProjectCard img={visualIdentity1} title="Mockup Set 1" category="Identity" color="bg-gray-800" />
+                <ProjectCard img={visualIdentity2} title="Mockup Set 2" category="Identity" color="bg-gray-800" />
             </div>
           </div>
         </section>
 
         {/* Section: Packaging */}
         <section>
-          <SectionTitle title="Packaging" />
+          <SectionTitle title="Thumbnail" />
           <p className="text-center text-gray-400 max-w-2xl mx-auto mb-10">
             Product presentation designs focusing on shelf impact and brand consistency.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <div key={item} className="aspect-square bg-gray-900 rounded-lg overflow-hidden hover:ring-2 hover:ring-green-500 transition-all cursor-pointer">
-                <img src={`/api/placeholder/400/400?text=Pack+${item}`} alt="Packaging" className="w-full h-full object-cover opacity-80 hover:opacity-100" />
+            {thumbnails?.map((item) => (
+              <div className="aspect-video bg-gray-900 rounded-lg overflow-hidden hover:ring-2 hover:ring-green-500 transition-all cursor-pointer">
+                <img src={item} alt="Packaging" className="w-full h-full object-cover opacity-80 hover:opacity-100" />
               </div>
             ))}
           </div>
@@ -214,9 +247,9 @@ const Portfolio = () => {
         <section>
           <SectionTitle title="Social Media Post" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-             {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-              <div key={item} className="aspect-square bg-gray-900 rounded-lg overflow-hidden group">
-                 <img src={`/api/placeholder/300/300?text=Social+${item}`} alt="Social" className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity" />
+             {socialMediaLinks.map((item) => (
+              <div key={item} className="aspect-square  rounded-lg overflow-hidden group">
+                 <img src={item} alt="Social" className="w-full h-full object-cover transition-opacity" />
               </div>
             ))}
           </div>
@@ -227,16 +260,16 @@ const Portfolio = () => {
           <SectionTitle title="Ads" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="aspect-video bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center">
-                <span className="text-gray-500">Banner Ad Campaign 1</span>
+                <img src={ads1} alt="Social" className="w-full h-full object-cover transition-opacity" />
             </div>
             <div className="aspect-video bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center">
-                <span className="text-gray-500">Banner Ad Campaign 2</span>
+                <img src={ads2} alt="Social" className="w-full h-full object-cover transition-opacity" />
             </div>
             <div className="aspect-video bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center">
-                <span className="text-gray-500">Banner Ad Campaign 3</span>
+                <img src={ads3} alt="Social" className="w-full h-full object-cover transition-opacity" />
             </div>
             <div className="aspect-video bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center">
-                <span className="text-gray-500">Banner Ad Campaign 4</span>
+                <img src={ads4} alt="Social" className="w-full h-full object-cover transition-opacity" />
             </div>
           </div>
         </section>
@@ -396,13 +429,13 @@ const SectionTitle = ({ title }: {title: string}) => (
   </div>
 );
 
-const ProjectCard = ({ title, category, color }: {title: string, category: string, color: string}) => (
+const ProjectCard = ({ title, img, category, color }: {title: string, img: string, category: string, color: string}) => (
   <div className={`group relative h-64 rounded-lg overflow-hidden border border-gray-800 ${color}`}>
-    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-300"></div>
+    <div className="absolute inset-0 transition-all duration-300"></div>
     {/* Placeholder content centered */}
     <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-6xl font-serif opacity-20 text-white group-hover:scale-110 transition-transform duration-500">
-            {title.charAt(0)}
+        <span className="text-6xl font-serif text-white group-hover:scale-110 transition-transform duration-500">
+            <img src={img} alt={title} />
         </span>
     </div>
     
