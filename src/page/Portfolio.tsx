@@ -1,5 +1,4 @@
-
-import { Mail, Instagram, Linkedin, ArrowUpRight, Globe, Phone } from 'lucide-react';
+import { Mail, Instagram, Linkedin, ArrowUpRight, Phone } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 
 import frontGreenImage from '../assets/front_green_1.png';
@@ -150,11 +149,14 @@ const Portfolio = () => {
             </span>
           </h1>
           <p className="text-gray-400 text-lg max-w-lg mb-8">
-            Specializing in <span className='font-semibold text-white'> Brand Identity, Packaging Design, and Social Media visuals </span> that leave a lasting impression.
+            Specializing in <span className='font-semibold text-white'>Brand Identity, Ads, and Social Media visuals </span> that leave a lasting impression.
           </p>
-          <button className="bg-green-600 text-black px-8 py-3 rounded-full font-bold hover:bg-green-500 transition-all flex items-center gap-2 cursor-pointer">
-            View My Work <ArrowUpRight size={20} />
-          </button>
+          <a 
+  href="#work" 
+  className="bg-green-600 text-black px-8 py-3 rounded-full font-bold hover:bg-green-500 transition-all flex items-center gap-2 cursor-pointer w-fit"
+>
+  Explore My Work <ArrowUpRight size={20} />
+</a>
         </div>
 
         {/* --- Right Content --- */}
@@ -163,20 +165,21 @@ const Portfolio = () => {
           {/* Main Container */}
           <div className="relative w-64 h-64 md:w-80 md:h-80">
             
-            {/* --- 1. THE SPINNING CIRCLE (Added Back) --- */}
-            {/* scale-125 makes it slightly larger than the profile image, just like your original */}
+            {/* --- 1. THE SPINNING CIRCLE --- */}
             <div className="absolute inset-0 border border-dashed border-gray-700 rounded-full scale-125 animate-[spin_40s_linear_infinite]"></div>
 
             {/* --- 2. Profile Image --- */}
-            <div className="w-full h-full rounded-full border-2 border-green-500/50 p-2 relative z-10 bg-black">
+            {/* ADDED: group class to container, and hover scale/brightness to image */}
+            <div className="w-full h-full rounded-full border-2 border-green-500/50 p-2 relative z-10 bg-black group overflow-hidden">
               <img
                 src={frontGreenImage}
                 alt="Profile"
-                className="w-full h-full object-cover rounded-full"
+                className="w-full h-full object-cover rounded-full transition-all duration-500 group-hover:scale-105 group-hover:brightness-110"
               />
             </div>
 
             {/* --- 3. Floating Icons --- */}
+            {/* Note: The container already has hover:scale-110, which affects the image inside. This is good. */}
             {tools.map((tool, index) => (
               <div
                 key={tool.name}
@@ -201,6 +204,7 @@ const Portfolio = () => {
       <main className="max-w-7xl mx-auto px-4 py-10 space-y-32">
 
         {/* Section: Logo Folio */}
+        {/* Note: ProjectCard component already has good hover effects */}
         <section id="work">
           <SectionTitle title="Logo Folio" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -213,28 +217,33 @@ const Portfolio = () => {
         <section>
           <SectionTitle title="Visual Identity" />
           <div className="grid grid-cols-1 gap-6">
-             {/* Wide banner style cards */}
-            <div className="h-64 bg-gray-900 rounded-lg overflow-hidden group relative border border-gray-800">
-              
-              <img src={visualIdentity} className="w-full h-full group-hover:scale-105" alt="Identity" />
+              {/* Wide banner style cards - Already has good hover effect */}
+            <div className=" bg-gray-900 rounded-lg overflow-hidden group relative border border-gray-800">
+              <img src={visualIdentity} className="w-full h-full group-hover:scale-105 transition-transform duration-500" alt="Identity" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <ProjectCard img={visualIdentity1} title="Mockup Set 1" category="Identity" color="bg-gray-800" />
-                <ProjectCard img={visualIdentity2} title="Mockup Set 2" category="Identity" color="bg-gray-800" />
+                <ProjectCard img={visualIdentity1} title="Mockup" category="&Done" color="bg-gray-800" />
+                <ProjectCard img={visualIdentity2} title="Mockup" category="The Brew Havean" color="bg-gray-800" />
             </div>
           </div>
         </section>
 
-        {/* Section: Packaging */}
+        {/* Section: Packaging (Thumbnails) */}
         <section>
           <SectionTitle title="Thumbnail" />
           <p className="text-center text-gray-400 max-w-2xl mx-auto mb-10">
             Product presentation designs focusing on shelf impact and brand consistency.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {thumbnails?.map((item) => (
-              <div className="aspect-video bg-gray-900 rounded-lg overflow-hidden hover:ring-2 hover:ring-green-500 transition-all cursor-pointer">
-                <img src={item} alt="Packaging" className="w-full h-full object-cover opacity-80 hover:opacity-100" />
+            {thumbnails?.map((item, index) => (
+              /* ADDED: 'group' class to container. */
+              /* ADDED: group-hover:scale-105 and duration-500 to image. Changed opacity hover to group-hover. */
+              <div key={index} className="aspect-video bg-gray-900 rounded-lg overflow-hidden group hover:ring-2 hover:ring-green-500 transition-all cursor-pointer">
+                <img 
+                  src={item} 
+                  alt="Packaging" 
+                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transform transition-all duration-500 group-hover:scale-105" 
+                />
               </div>
             ))}
           </div>
@@ -244,9 +253,14 @@ const Portfolio = () => {
         <section>
           <SectionTitle title="Social Media Post" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-             {socialMediaLinks.map((item) => (
-              <div key={item} className="aspect-square  rounded-lg overflow-hidden group">
-                 <img src={item} alt="Social" className="w-full h-full object-cover transition-opacity" />
+              {socialMediaLinks.map((item, index) => (
+               /* ADDED: Added transform transition and group-hover:scale-110 to image. Removed old transition-opacity. */
+              <div key={index} className="aspect-square rounded-lg overflow-hidden group bg-gray-900 border border-gray-800">
+                 <img 
+                    src={item} 
+                    alt="Social" 
+                    className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" 
+                 />
               </div>
             ))}
           </div>
@@ -256,17 +270,19 @@ const Portfolio = () => {
         <section>
           <SectionTitle title="Ads" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="aspect-video bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center">
-                <img src={ads1} alt="Social" className="w-full h-full object-cover transition-opacity" />
+            {/* ADDED: 'group' and 'overflow-hidden' to all containers. */}
+            {/* ADDED: transform transition and group-hover:scale-105 to all images. */}
+            <div className="aspect-video bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center overflow-hidden group">
+                <img src={ads1} alt="Social" className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105" />
             </div>
-            <div className="aspect-video bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center">
-                <img src={ads2} alt="Social" className="w-full h-full object-cover transition-opacity" />
+            <div className="aspect-video bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center overflow-hidden group">
+                <img src={ads2} alt="Social" className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105" />
             </div>
-            <div className="aspect-video bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center">
-                <img src={ads3} alt="Social" className="w-full h-full object-cover transition-opacity" />
+            <div className="aspect-video bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center overflow-hidden group">
+                <img src={ads3} alt="Social" className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105" />
             </div>
-            <div className="aspect-video bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center">
-                <img src={ads4} alt="Social" className="w-full h-full object-cover transition-opacity" />
+            <div className="aspect-video bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center overflow-hidden group">
+                <img src={ads4} alt="Social" className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105" />
             </div>
           </div>
         </section>
@@ -277,7 +293,11 @@ const Portfolio = () => {
       <section id="about" className="relative py-24 px-6 mt-20 bg-linear-to-b from-black via-red-950/20 to-black">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl font-serif mb-12">About</h2>
-          <div className="flex flex-col md:flex-row items-center gap-12">
+          
+          {/* CHANGED: 'flex-col' to 'flex-col-reverse' */}
+          {/* This puts the bottom item (Image) first on mobile, but keeps Text first on Desktop (md:flex-row) */}
+          <div className="flex flex-col-reverse md:flex-row items-center gap-12">
+            
             <div className="flex-1 text-left space-y-6">
               <p className="text-gray-300 leading-relaxed">
                 I’m Sanjay Sondhiya — a visual storyteller obsessed with clarity. With extensive experience in Art Direction, I combine bold typography, color theory, and market logic to craft distinctive designs that resonate.
@@ -286,9 +306,15 @@ const Portfolio = () => {
                 I move beyond surface-level aesthetics to build visual systems that solve problems and communicate value instantly. My work doesn't just decorate a brand; it defines it, ensuring your business leaves a memorable mark in a crowded marketplace.
               </p>
             </div>
-            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-red-900/50 shadow-2xl">
-               <img src={aboutImage} alt="About Portrait" className="w-full h-full object-cover" />
+
+            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-red-900/50 shadow-2xl group flex-shrink-0">
+               <img 
+                 src={aboutImage} 
+                 alt="About Portrait" 
+                 className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" 
+               />
             </div>
+
           </div>
         </div>
       </section>
@@ -297,26 +323,10 @@ const Portfolio = () => {
       <footer id="contact" className="bg-black pt-20 pb-10 border-t border-gray-900">
         <div className="max-w-4xl mx-auto text-center px-4">
           <h2 className="text-green-500 text-4xl md:text-6xl font-bold mb-4">Let's Talk</h2>
-          {/* Clickable Email */}
+          
 
           <div className='flex flex-col md:flex-row items-center justify-center gap-6'>
-  {/* Clickable Email */}
-  <a 
-    href="mailto:example@gmail.com" 
-    className="flex items-center gap-2 text-white text-xl md:text-2xl mb-8 hover:text-gray-300 transition-colors"
-  >
-    <Mail className="w-3 h-3 md:w-7 md:h-7" />
-    <span>example@gmail.com</span>
-  </a>
-
-  {/* Clickable Mobile */}
-  <a 
-    href="tel:+918090564901" 
-    className="flex items-center gap-2 text-white text-xl md:text-2xl mb-8 hover:text-gray-300 transition-colors"
-  >
-    <Phone className="w-3 h-3 md:w-6 md:h-6" />
-    <span>+91 8090564901</span>
-  </a>
+  
 </div>
 
           <div className="max-w-md mx-auto mt-3 mb-7 rounded-lg shadow-md">
@@ -375,10 +385,10 @@ const Portfolio = () => {
         </div>
 
         <div className="relative inline-block">
-          <div className="absolute inset-0 m-auto w-48 h-12 bg-gradient-to-r from-red-500 via-yellow-400 to-green-500 rounded-full blur-xl opacity-40 animate-pulse"></div>
+          <div className="absolute inset-0 m-auto w-48 h-12 rounded-full blur-xl opacity-40 animate-pulse"></div>
           <button
             type="submit"
-            className="relative bg-white m-auto w-48 text-black font-semibold py-2 px-10 rounded-lg text-lg transition-transform transform hover:scale-105 duration-300 shadow-md hover:shadow-lg"
+            className="relative cursor-pointer bg-white m-auto w-48 text-black font-semibold py-2 px-10 rounded-lg text-lg transition-transform transform hover:scale-105 duration-300 shadow-md hover:shadow-lg"
           >
             {status === 'Submitting...' ? 'Sending...' : 'Submit'}
           </button>
@@ -389,10 +399,10 @@ const Portfolio = () => {
     </div>
           
           <div className="flex justify-center gap-8 mb-12">
-            <SocialLink icon={<Instagram size={24} />} label="Instagram" />
-            <SocialLink icon={<Linkedin size={24} />} label="LinkedIn" />
-            <SocialLink icon={<Globe size={24} />} label="Behance" />
-            <SocialLink icon={<Mail size={24} />} label="Email" />
+            <SocialLink href={"https://www.instagram.com/iammdesigner/"} icon={<Instagram size={24} />} label="Instagram" />
+            <SocialLink href={"https://www.linkedin.com/in/sanjaysondhiya/"} icon={<Linkedin size={24} />} label="LinkedIn" />
+            <SocialLink href={"tel:+918090564901"} icon={<Phone size={24} />} label="Behance" />
+            <SocialLink href={"mailto:mrsanjaysondhiya@gmail.com"} icon={<Mail size={24} />} label="Email"  />
           </div>
 
           <div className="text-center">
@@ -426,12 +436,11 @@ const SectionTitle = ({ title }: {title: string}) => (
   </div>
 );
 
+// Note: ProjectCard already had excellent hover effects, so it remains unchanged.
 const ProjectCard = ({ title, img, category, color }: {title: string, img: string, category: string, color: string}) => (
   <div className={`group relative w-full rounded-lg overflow-hidden border border-gray-800 ${color}`}>
     
     {/* 1. IMAGE (Natural Height) */}
-    {/* Removed 'absolute'. Added 'block w-full h-auto'. 
-        This lets the image dictate the height of the card. */}
     <img 
         src={img} 
         alt={title} 
@@ -439,7 +448,6 @@ const ProjectCard = ({ title, img, category, color }: {title: string, img: strin
     />
 
     {/* 2. OVERLAY & CONTENT (Sit on top) */}
-    {/* These remain absolute so they float over the image */}
     <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all duration-300"></div>
 
     <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/70 to-transparent">
@@ -453,8 +461,8 @@ const ProjectCard = ({ title, img, category, color }: {title: string, img: strin
 </div>
 );
 
-const SocialLink = ({ icon, label }: {icon: ReactNode, label: string}) => (
-  <a href="#" className="w-12 h-12 rounded-full bg-gray-900 flex items-center justify-center text-white hover:bg-green-600 hover:text-black transition-all duration-300" aria-label={label}>
+const SocialLink = ({ icon, label, href }: {icon: ReactNode, label: string, href: string}) => (
+  <a href={href} target='_blank' className="w-12 h-12 rounded-full bg-gray-900 flex items-center justify-center text-white hover:bg-green-600 hover:text-black transition-all duration-300" aria-label={label}>
     {icon}
   </a>
 );
