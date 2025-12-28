@@ -204,8 +204,8 @@ const Portfolio = () => {
         <section id="work">
           <SectionTitle title="Logo Folio" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <ProjectCard img={logo1} title="& Done" category="Tech" color="bg-blue-900" />
-            <ProjectCard img={logo2} title="Sicsem" category="Apparel" color="bg-gray-800" />
+            <ProjectCard img={logo1} title="& Done" category="Apparel" color="bg-blue-900" />
+            <ProjectCard img={logo2} title="Sicsem" category="Tech" color="bg-gray-800" />
           </div>
         </section>
 
