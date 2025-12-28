@@ -215,11 +215,8 @@ const Portfolio = () => {
           <div className="grid grid-cols-1 gap-6">
              {/* Wide banner style cards */}
             <div className="h-64 bg-gray-900 rounded-lg overflow-hidden group relative border border-gray-800">
-              <div className="absolute inset-0 bg-linear-to-r from-black/60 to-transparent z-10 flex flex-col justify-center px-10">
-                <h3 className="text-3xl font-serif text-white mb-2">Corporate Branding</h3>
-                <p className="text-gray-400">Stationery & Digital Assets</p>
-              </div>
-              <img src={visualIdentity} className="w-full h-full group-hover:scale-105 transition-transform" alt="Identity" />
+              
+              <img src={visualIdentity} className="w-full h-full group-hover:scale-105" alt="Identity" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <ProjectCard img={visualIdentity1} title="Mockup Set 1" category="Identity" color="bg-gray-800" />
@@ -430,25 +427,30 @@ const SectionTitle = ({ title }: {title: string}) => (
 );
 
 const ProjectCard = ({ title, img, category, color }: {title: string, img: string, category: string, color: string}) => (
-  <div className={`group relative h-64 rounded-lg overflow-hidden border border-gray-800 ${color}`}>
-    <div className="absolute inset-0 transition-all duration-300"></div>
-    {/* Placeholder content centered */}
-    <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-6xl font-serif text-white group-hover:scale-110 transition-transform duration-500">
-            <img src={img} alt={title} />
-        </span>
-    </div>
+  <div className={`group relative w-full rounded-lg overflow-hidden border border-gray-800 ${color}`}>
     
-    {/* Bottom info */}
-    <div className="absolute bottom-0 left-0 w-full p-6 bg-linear-to-t from-black to-transparent">
-      <h3 className="text-xl font-bold text-white mb-1 translate-y-2 group-hover:translate-y-0 transition-transform">
-        {title}
-      </h3>
-      <p className="text-green-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-        {category}
-      </p>
+    {/* 1. IMAGE (Natural Height) */}
+    {/* Removed 'absolute'. Added 'block w-full h-auto'. 
+        This lets the image dictate the height of the card. */}
+    <img 
+        src={img} 
+        alt={title} 
+        className="block w-full h-auto group-hover:scale-110 transition-transform duration-500"
+    />
+
+    {/* 2. OVERLAY & CONTENT (Sit on top) */}
+    {/* These remain absolute so they float over the image */}
+    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all duration-300"></div>
+
+    <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/70 to-transparent">
+        <h3 className="text-xl font-bold text-white mb-1 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+            {title}
+        </h3>
+        <p className="text-green-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            {category}
+        </p>
     </div>
-  </div>
+</div>
 );
 
 const SocialLink = ({ icon, label }: {icon: ReactNode, label: string}) => (
