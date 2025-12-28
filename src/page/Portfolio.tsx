@@ -406,9 +406,12 @@ const Portfolio = () => {
           </div>
 
           <div className="text-center">
-            <button className="bg-white text-black px-10 py-3 rounded-full font-bold hover:bg-gray-200 transition-colors">
-              Thanks for visiting!
-            </button>
+    <button 
+  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+  className="bg-white text-black px-10 py-3 rounded-full font-bold hover:bg-gray-200 transition-colors cursor-pointer"
+>
+  Thanks for visiting!
+</button>
           </div>
           
           <div className="mt-20 border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
