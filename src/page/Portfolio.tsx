@@ -231,9 +231,6 @@ const Portfolio = () => {
         {/* Section: Packaging (Thumbnails) */}
         <section>
           <SectionTitle title="Thumbnail" />
-          <p className="text-center text-gray-400 max-w-2xl mx-auto mb-10">
-            Product presentation designs focusing on shelf impact and brand consistency.
-          </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {thumbnails?.map((item, index) => (
               /* ADDED: 'group' class to container. */
