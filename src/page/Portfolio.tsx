@@ -399,7 +399,7 @@ const Portfolio = () => {
             <SocialLink href={"https://www.instagram.com/iammdesigner/"} icon={<Instagram size={24} />} label="Instagram" />
             <SocialLink href={"https://www.linkedin.com/in/sanjaysondhiya/"} icon={<Linkedin size={24} />} label="LinkedIn" />
             <SocialLink href={"tel:+918090564901"} icon={<Phone size={24} />} label="Behance" />
-            <SocialLink href={"mailto:mrsanjaysondhiya@gmail.com"} icon={<Mail size={24} />} label="Email"  />
+            <SocialLink href={"mailto:thesanjaysondhiya@gmail.com"} icon={<Mail size={24} />} label="Email"  />
           </div>
 
           <div className="text-center">
